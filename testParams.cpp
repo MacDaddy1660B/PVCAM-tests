@@ -515,6 +515,112 @@ int main() {
 	}
 	catch(...) {throw;}
 
+	
+        std::cout << "\n";
+	std::cout << "Setting readout speed to 1 (should succeed)... ";
+	param_valueInt16 = 1;
+	try {
+		rs = pl_set_param( hCam, PARAM_SPDTAB_INDEX, (void*)&param_valueInt16 );
+	}
+	catch(...) {throw;}
+	plGetErrorMessage();
+	
+	// Check  pixel time (readout frequency) attributes.	
+	std::cout << "\nPARAM_PIX_TIME\n";
+	try {
+		rs = pl_get_param( hCam, PARAM_PIX_TIME, ATTR_ACCESS, (void *)&param_valueUns16);
+		std::cout << "Access Mode:\t"<< param_valueUns16;
+		if (param_valueUns16 == ACC_ERROR) std::cout << " (ERROR)\n";
+		else if (param_valueUns16 == ACC_READ_ONLY) std::cout << " (READ ONLY)\n";
+		else if (param_valueUns16 == ACC_READ_WRITE) std::cout << " (READ/WRITE)\n";
+		else if (param_valueUns16 == ACC_EXIST_CHECK_ONLY) std::cout << " (EXIST/CHECK ONLY)\n";
+		else if (param_valueUns16 == ACC_WRITE_ONLY) std::cout << " (WRITE ONLY)\n";
+		else std::cout << " (UNKNOWN)\n";
+	}
+	catch(...) {throw;}
+	
+	try {
+		rs = pl_get_param( hCam, PARAM_PIX_TIME, ATTR_CURRENT, (void *)&param_valueUns16);
+		std::cout << "Current value:\t" << param_valueUns16 << "\n";
+	}
+	catch(...) {throw;}
+	
+	try {
+		rs = pl_get_param( hCam, PARAM_PIX_TIME, ATTR_DEFAULT, (void *)&param_valueUns16);
+		std::cout << "Default value:\t" << param_valueUns16 << "\n";
+	}
+	catch(...) {throw;}
+	
+	try {
+		rs = pl_get_param( hCam, PARAM_PIX_TIME, ATTR_INCREMENT, (void *)&param_valueUns16);
+		std::cout << "Increment value:\t" << param_valueUns16 << "\n";
+	}
+	catch(...) {throw;}
+	
+	try {
+		rs = pl_get_param( hCam, PARAM_PIX_TIME, ATTR_MIN, (void *)&param_valueUns16);
+		std::cout << "Minimum value:\t" << param_valueUns16 << "\n";
+	}
+	catch(...) {throw;}
+	
+	try {
+		rs = pl_get_param( hCam, PARAM_PIX_TIME, ATTR_MAX, (void *)&param_valueUns16);
+		std::cout << "Maximum value:\t" << param_valueUns16 << "\n";
+	}
+	catch(...) {throw;}
+	
+        std::cout << "\n";
+	std::cout << "Setting readout speed to -1 (should fail)... ";
+	param_valueInt16 = -1;
+	try {
+		rs = pl_set_param( hCam, PARAM_SPDTAB_INDEX, (void*)&param_valueInt16 );
+	}
+	catch(...) {throw;}
+	plGetErrorMessage();
+
+	std::cout << "\nPARAM_PIX_TIME\n";
+	try {
+		rs = pl_get_param( hCam, PARAM_PIX_TIME, ATTR_ACCESS, (void *)&param_valueUns16);
+		std::cout << "Access Mode:\t"<< param_valueUns16;
+		if (param_valueUns16 == ACC_ERROR) std::cout << " (ERROR)\n";
+		else if (param_valueUns16 == ACC_READ_ONLY) std::cout << " (READ ONLY)\n";
+		else if (param_valueUns16 == ACC_READ_WRITE) std::cout << " (READ/WRITE)\n";
+		else if (param_valueUns16 == ACC_EXIST_CHECK_ONLY) std::cout << " (EXIST/CHECK ONLY)\n";
+		else if (param_valueUns16 == ACC_WRITE_ONLY) std::cout << " (WRITE ONLY)\n";
+		else std::cout << " (UNKNOWN)\n";
+	}
+	catch(...) {throw;}
+	
+	try {
+		rs = pl_get_param( hCam, PARAM_PIX_TIME, ATTR_CURRENT, (void *)&param_valueUns16);
+		std::cout << "Current value:\t" << param_valueUns16 << "\n";
+	}
+	catch(...) {throw;}
+	
+	try {
+		rs = pl_get_param( hCam, PARAM_PIX_TIME, ATTR_DEFAULT, (void *)&param_valueUns16);
+		std::cout << "Default value:\t" << param_valueUns16 << "\n";
+	}
+	catch(...) {throw;}
+	
+	try {
+		rs = pl_get_param( hCam, PARAM_PIX_TIME, ATTR_INCREMENT, (void *)&param_valueUns16);
+		std::cout << "Increment value:\t" << param_valueUns16 << "\n";
+	}
+	catch(...) {throw;}
+	
+	try {
+		rs = pl_get_param( hCam, PARAM_PIX_TIME, ATTR_MIN, (void *)&param_valueUns16);
+		std::cout << "Minimum value:\t" << param_valueUns16 << "\n";
+	}
+	catch(...) {throw;}
+	
+	try {
+		rs = pl_get_param( hCam, PARAM_PIX_TIME, ATTR_MAX, (void *)&param_valueUns16);
+		std::cout << "Maximum value:\t" << param_valueUns16 << "\n";
+	}
+	catch(...) {throw;}
+
 	/* Close the camera and uninitialize the library. */
 	pl_cam_close( hCam );
 	pl_pvcam_uninit();
